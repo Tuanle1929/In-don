@@ -1395,12 +1395,15 @@ const DEFAULT_PRODUCTS = [
 
     const DEFAULT_CUSTOMERS = [];
 
+    const REAL_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbybm7bcQ3SKKJe5SQ0hrulqz562jC-qpf-SD7jByqRTI5GZK9gdxRaJBbtOXW6tFYL6KQ/exec";
+    const OLD_WEB_STORE_URL = "https://script.google.com/macros/s/AKfycbyu77ZRFca0pFXZPnfwn3gISQRbXOp5x-TCDg6RKGR_beG8zargaNKB0SoqI9bwwf8/exec";
+
     const DEFAULT_SETTINGS = {
       shopName: "TOBOKO STORE",
       shopPhone: "0388.054.613",
       shopAddress: "Ấp Tân Hòa, Xã Hóc Môn, Thành phố Hồ Chí Minh",
       shopFooterNote: "Cảm ơn quý khách đã tin tưởng và ủng hộ Toboko Store!",
-      sheetApiUrl: "https://script.google.com/macros/s/AKfycbyu77ZRFca0pFXZPnfwn3gISQRbXOp5x-TCDg6RKGR_beG8zargaNKB0SoqI9bwwf8/exec"
+      sheetApiUrl: REAL_SHEET_API_URL
     };
 
     const DEFAULT_SHIP_FEE = 14000;
@@ -1408,10 +1411,15 @@ const DEFAULT_PRODUCTS = [
     let state = {
       settings: (() => {
         const saved = JSON.parse(localStorage.getItem('tbk_settings') || '{}');
+        let currentUrl = saved.sheetApiUrl;
+        // Tự động sửa nếu thiết bị từng lưu nhầm link web store cũ hoặc để trống
+        if (!currentUrl || currentUrl === OLD_WEB_STORE_URL) {
+          currentUrl = REAL_SHEET_API_URL;
+        }
         return {
           ...DEFAULT_SETTINGS,
           ...saved,
-          sheetApiUrl: (saved && saved.sheetApiUrl) ? saved.sheetApiUrl : DEFAULT_SETTINGS.sheetApiUrl
+          sheetApiUrl: currentUrl
         };
       })(),
       products: (() => {
@@ -3276,6 +3284,7 @@ const DEFAULT_PRODUCTS = [
       showToast('info', 'Đang đẩy sản phẩm lên Sheet...');
       fetch(apiUrl, {
         method: 'POST',
+        mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ action: 'SYNC_PRODUCTS', products: state.products })
       }).then(() => {
@@ -3390,6 +3399,7 @@ const DEFAULT_PRODUCTS = [
       showToast('info', 'Đang đẩy danh bạ lên Sheet...');
       fetch(apiUrl, {
         method: 'POST',
+        mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ action: 'SYNC_CUSTOMERS', customers: state.customers })
       }).then(() => {
@@ -3491,11 +3501,13 @@ const DEFAULT_PRODUCTS = [
       
       fetch(apiUrl, {
         method: 'POST',
+        mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ action: 'SYNC_PRODUCTS', products: state.products })
       }).then(() => {
         return fetch(apiUrl, {
           method: 'POST',
+          mode: 'no-cors',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify({ action: 'SYNC_CUSTOMERS', customers: state.customers })
         });
