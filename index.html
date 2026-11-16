@@ -11,8 +11,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Đơn Toboko" />
   <meta name="theme-color" content="#ffffff" />
-  <link rel="icon" type="image/jpeg" href="logo.jpg" />
-  <link id="appleTouchIconLink" rel="apple-touch-icon" href="logo.jpg" />
+  <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/Tuanle1929/Toboko-Store/refs/heads/main/Logo%20Toboko.jpg" />
+  <link id="appleTouchIconLink" rel="apple-touch-icon" href="https://raw.githubusercontent.com/Tuanle1929/Toboko-Store/refs/heads/main/Logo%20Toboko.jpg" />
   <link id="webManifestLink" rel="manifest" href="" />
 
   <!-- Tailwind CSS CDN -->
@@ -171,16 +171,17 @@
 
   <!-- TOP HEADER GỌN GÀNG -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
-    <div class="max-w-[1600px] mx-auto px-4 py-2.5 flex flex-wrap items-center justify-between gap-3">
-      <div class="flex items-center gap-2.5">
+    <div class="max-w-[1600px] mx-auto px-3 sm:px-4 py-2.5 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2 sm:gap-2.5 min-w-0">
         <img 
-          src="logo.jpg" 
+          src="https://raw.githubusercontent.com/Tuanle1929/Toboko-Store/refs/heads/main/Logo%20Toboko.jpg" 
+          onerror="this.onerror=null; this.src='logo.jpg';"
           alt="Logo Toboko" 
-          class="w-9 h-9 rounded-full object-cover shadow-sm border border-slate-200 shrink-0" 
+          class="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover shadow-sm border border-slate-200 shrink-0" 
         />
-        <h1 class="font-extrabold text-base sm:text-lg text-slate-900 tracking-tight flex items-center gap-2">
-          Tạo Đơn Đặt Hàng Toboko
-          <span class="text-xs bg-slate-100 text-slate-600 border border-slate-200 font-bold px-2 py-0.5 rounded-full">v1.5</span>
+        <h1 class="font-extrabold text-sm sm:text-lg text-slate-900 tracking-tight flex items-center gap-1.5 truncate">
+          <span class="truncate">Tạo Đơn Đặt Hàng Toboko</span>
+          <span class="text-[10px] sm:text-xs bg-slate-100 text-slate-600 border border-slate-200 font-bold px-1.5 sm:px-2 py-0.5 rounded-full shrink-0">v1.5</span>
         </h1>
       </div>
 
@@ -223,18 +224,18 @@
       </div>
 
       <!-- Mobile Menu Button & Dropdown (Chỉ hiện trên mobile < lg) -->
-      <div class="relative lg:hidden">
+      <div class="relative lg:hidden shrink-0">
         <button 
           id="btnMobileMenuToggle" 
           onclick="toggleMobileMenu()" 
-          class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-800 font-bold text-xs transition"
+          class="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-800 font-bold text-xs transition"
         >
           <svg class="w-4 h-4 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
           <span>Menu</span>
         </button>
 
-        <!-- Dropdown Menu nổi cho Mobile -->
-        <div id="mobileMenuDropdown" class="hidden absolute right-0 top-10 w-52 bg-white border border-slate-200 rounded-2xl shadow-2xl p-1.5 z-50 space-y-0.5">
+        <!-- Dropdown Menu nổi cho Mobile: bung từ góc phải vào trong màn hình -->
+        <div id="mobileMenuDropdown" class="hidden absolute right-0 top-full mt-2 w-56 max-w-[calc(100vw-24px)] bg-white border border-slate-200 rounded-2xl shadow-2xl p-1.5 z-50 space-y-0.5">
           <button onclick="openModal('modalProducts'); toggleMobileMenu(false);" class="w-full flex items-center justify-between px-3 py-2 rounded-xl hover:bg-slate-50 text-slate-700 font-semibold text-xs transition">
             <span class="flex items-center gap-2">
               <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
@@ -641,7 +642,7 @@
             </div>
             
             <div class="text-right shrink-0">
-              <div class="inline-block whitespace-nowrap bg-slate-900 text-white font-extrabold text-xs px-3.5 py-1.5 rounded-md uppercase tracking-wider mb-1.5">
+              <div id="invOrderBadge" class="inline-block whitespace-nowrap bg-slate-900 text-white font-extrabold text-xs px-3.5 py-1.5 rounded-md uppercase tracking-wider mb-1.5">
                 PHIẾU ĐẶT HÀNG
               </div>
               <div class="text-xs text-slate-700 font-bold whitespace-nowrap">
@@ -1058,12 +1059,339 @@
 
   <!-- JAVASCRIPT LOGIC TRỌN BỘ -->
   <script>
-    const DEFAULT_PRODUCTS = [
-      { code: "X01", name: "Mi Đen Muse ( Mã X )", variant: "X01", unit: "Hộp", price: 120000 },
-      { code: "X02", name: "Mi Đen Muse ( Mã X )", variant: "X02", unit: "Hộp", price: 120000 },
-      { code: "X03", name: "Mi Đen Muse ( Mã X )", variant: "X03", unit: "Hộp", price: 120000 },
-      { code: "X04", name: "Mi Đen Muse ( Mã X )", variant: "X04", unit: "Hộp", price: 120000 }
-    ];
+const DEFAULT_PRODUCTS = [
+    {"code":"X01","name":"Mi Đen Muse ( Mã X )","variant":"X01","unit":"Hộp","price":60000},
+    {"code":"X02","name":"Mi Đen Muse ( Mã X )","variant":"X02","unit":"Hộp","price":60000},
+    {"code":"X04","name":"Mi Đen Muse ( Mã X )","variant":"X04","unit":"Hộp","price":60000},
+    {"code":"X05","name":"Mi Đen Muse ( Mã X )","variant":"X05","unit":"Hộp","price":60000},
+    {"code":"X06","name":"Mi Đen Muse ( Mã X )","variant":"X06","unit":"Hộp","price":60000},
+    {"code":"X07","name":"Mi Đen Muse ( Mã X )","variant":"X07","unit":"Hộp","price":60000},
+    {"code":"X08","name":"Mi Đen Muse ( Mã X )","variant":"X08","unit":"Hộp","price":60000},
+    {"code":"X09","name":"Mi Đen Muse ( Mã X )","variant":"X09","unit":"Hộp","price":60000},
+    {"code":"X11","name":"Mi Đen Muse ( Mã X )","variant":"X11","unit":"Hộp","price":60000},
+    {"code":"X13","name":"Mi Đen Muse ( Mã X )","variant":"X13","unit":"Hộp","price":60000},
+    {"code":"X14","name":"Mi Đen Muse ( Mã X )","variant":"X14","unit":"Hộp","price":60000},
+    {"code":"X15","name":"Mi Đen Muse ( Mã X )","variant":"X15","unit":"Hộp","price":60000},
+    {"code":"X16","name":"Mi Đen Muse ( Mã X )","variant":"X16","unit":"Hộp","price":60000},
+    {"code":"X17","name":"Mi Đen Muse ( Mã X )","variant":"X17","unit":"Hộp","price":60000},
+    {"code":"X18","name":"Mi Đen Muse ( Mã X )","variant":"X18","unit":"Hộp","price":60000},
+    {"code":"X19","name":"Mi Đen Muse ( Mã X )","variant":"X19","unit":"Hộp","price":60000},
+    {"code":"X20","name":"Mi Đen Muse ( Mã X )","variant":"X20","unit":"Hộp","price":60000},
+    {"code":"X21","name":"Mi Đen Muse ( Mã X )","variant":"X21","unit":"Hộp","price":60000},
+    {"code":"X23","name":"Mi Đen Muse ( Mã X )","variant":"X23","unit":"Hộp","price":60000},
+    {"code":"X25","name":"Mi Đen Muse ( Mã X )","variant":"X25","unit":"Hộp","price":60000},
+    {"code":"X26","name":"Mi Đen Muse ( Mã X )","variant":"X26","unit":"Hộp","price":60000},
+    {"code":"X27","name":"Mi Đen Muse ( Mã X )","variant":"X27","unit":"Hộp","price":60000},
+    {"code":"X28","name":"Mi Đen Muse ( Mã X )","variant":"X28","unit":"Hộp","price":60000},
+    {"code":"X30","name":"Mi Đen Muse ( Mã X )","variant":"X30","unit":"Hộp","price":60000},
+    {"code":"X31","name":"Mi Đen Muse ( Mã X )","variant":"X31","unit":"Hộp","price":60000},
+    {"code":"X33","name":"Mi Đen Muse ( Mã X )","variant":"X33","unit":"Hộp","price":60000},
+    {"code":"X34","name":"Mi Đen Muse ( Mã X )","variant":"X34","unit":"Hộp","price":60000},
+    {"code":"X35","name":"Mi Đen Muse ( Mã X )","variant":"X35","unit":"Hộp","price":60000},
+    {"code":"X36","name":"Mi Đen Muse ( Mã X )","variant":"X36","unit":"Hộp","price":60000},
+    {"code":"X37","name":"Mi Đen Muse ( Mã X )","variant":"X37","unit":"Hộp","price":60000},
+    {"code":"X38","name":"Mi Đen Muse ( Mã X )","variant":"X38","unit":"Hộp","price":60000},
+    {"code":"X39","name":"Mi Đen Muse ( Mã X )","variant":"X39","unit":"Hộp","price":60000},
+    {"code":"X40","name":"Mi Đen Muse ( Mã X )","variant":"X40","unit":"Hộp","price":60000},
+    {"code":"X41","name":"Mi Đen Muse ( Mã X )","variant":"X41","unit":"Hộp","price":60000},
+    {"code":"X42","name":"Mi Đen Muse ( Mã X )","variant":"X42","unit":"Hộp","price":60000},
+    {"code":"X43","name":"Mi Đen Muse ( Mã X )","variant":"X43","unit":"Hộp","price":60000},
+    {"code":"X44","name":"Mi Đen Muse ( Mã X )","variant":"X44","unit":"Hộp","price":60000},
+    {"code":"X45","name":"Mi Đen Muse ( Mã X )","variant":"X45","unit":"Hộp","price":60000},
+    {"code":"X46","name":"Mi Đen Muse ( Mã X )","variant":"X46","unit":"Hộp","price":60000},
+    {"code":"X47","name":"Mi Đen Muse ( Mã X )","variant":"X47","unit":"Hộp","price":60000},
+    {"code":"X48","name":"Mi Đen Muse ( Mã X )","variant":"X48","unit":"Hộp","price":60000},
+    {"code":"X49","name":"Mi Đen Muse ( Mã X )","variant":"X49","unit":"Hộp","price":60000},
+    {"code":"X50","name":"Mi Đen Muse ( Mã X )","variant":"X50","unit":"Hộp","price":60000},
+    {"code":"X51","name":"Mi Đen Muse ( Mã X )","variant":"X51","unit":"Hộp","price":60000},
+    {"code":"X52","name":"Mi Đen Muse ( Mã X )","variant":"X52","unit":"Hộp","price":60000},
+    {"code":"X53","name":"Mi Đen Muse ( Mã X )","variant":"X53","unit":"Hộp","price":60000},
+    {"code":"X54","name":"Mi Đen Muse ( Mã X )","variant":"X54","unit":"Hộp","price":60000},
+    {"code":"X55","name":"Mi Đen Muse ( Mã X )","variant":"X55","unit":"Hộp","price":60000},
+    {"code":"X56","name":"Mi Đen Muse ( Mã X )","variant":"X56","unit":"Hộp","price":60000},
+    {"code":"X57","name":"Mi Đen Muse ( Mã X )","variant":"X57","unit":"Hộp","price":60000},
+    {"code":"X61","name":"Mi Đen Muse ( Mã X )","variant":"X61","unit":"Hộp","price":60000},
+    {"code":"X62","name":"Mi Đen Muse ( Mã X )","variant":"X62","unit":"Hộp","price":60000},
+    {"code":"X63","name":"Mi Đen Muse ( Mã X )","variant":"X63","unit":"Hộp","price":60000},
+    {"code":"X64","name":"Mi Đen Muse ( Mã X )","variant":"X64","unit":"Hộp","price":60000},
+    {"code":"X65","name":"Mi Đen Muse ( Mã X )","variant":"X65","unit":"Hộp","price":60000},
+    {"code":"X66","name":"Mi Đen Muse ( Mã X )","variant":"X66","unit":"Hộp","price":60000},
+    {"code":"X67","name":"Mi Đen Muse ( Mã X )","variant":"X67","unit":"Hộp","price":60000},
+    {"code":"X68","name":"Mi Đen Muse ( Mã X )","variant":"X68","unit":"Hộp","price":60000},
+    {"code":"X69","name":"Mi Đen Muse ( Mã X )","variant":"X69","unit":"Hộp","price":60000},
+    {"code":"X70","name":"Mi Đen Muse ( Mã X )","variant":"X70","unit":"Hộp","price":60000},
+    {"code":"X71","name":"Mi Đen Muse ( Mã X )","variant":"X71","unit":"Hộp","price":60000},
+    {"code":"X72","name":"Mi Đen Muse ( Mã X )","variant":"X72","unit":"Hộp","price":60000},
+    {"code":"X73","name":"Mi Đen Muse ( Mã X )","variant":"X73","unit":"Hộp","price":60000},
+    {"code":"X74","name":"Mi Đen Muse ( Mã X )","variant":"X74","unit":"Hộp","price":60000},
+    {"code":"X76","name":"Mi Đen Muse ( Mã X )","variant":"X76","unit":"Hộp","price":60000},
+    {"code":"X77","name":"Mi Đen Muse ( Mã X )","variant":"X77","unit":"Hộp","price":60000},
+    {"code":"X78","name":"Mi Đen Muse ( Mã X )","variant":"X78","unit":"Hộp","price":60000},
+    {"code":"X79","name":"Mi Đen Muse ( Mã X )","variant":"X79","unit":"Hộp","price":60000},
+    {"code":"X80","name":"Mi Đen Muse ( Mã X )","variant":"X80","unit":"Hộp","price":60000},
+    {"code":"X81","name":"Mi Đen Muse ( Mã X )","variant":"X81","unit":"Hộp","price":60000},
+    {"code":"X82","name":"Mi Đen Muse ( Mã X )","variant":"X82","unit":"Hộp","price":60000},
+    {"code":"X83","name":"Mi Đen Muse ( Mã X )","variant":"X83","unit":"Hộp","price":60000},
+    {"code":"X84","name":"Mi Đen Muse ( Mã X )","variant":"X84","unit":"Hộp","price":60000},
+    {"code":"X85","name":"Mi Đen Muse ( Mã X )","variant":"X85","unit":"Hộp","price":60000},
+    {"code":"X87","name":"Mi Đen Muse ( Mã X )","variant":"X87","unit":"Hộp","price":60000},
+    {"code":"X88","name":"Mi Đen Muse ( Mã X )","variant":"X88","unit":"Hộp","price":60000},
+    {"code":"X90","name":"Mi Đen Muse ( Mã X )","variant":"X90","unit":"Hộp","price":60000},
+    {"code":"X91","name":"Mi Đen Muse ( Mã X )","variant":"X91","unit":"Hộp","price":60000},
+    {"code":"X92","name":"Mi Đen Muse ( Mã X )","variant":"X92","unit":"Hộp","price":60000},
+    {"code":"X93","name":"Mi Đen Muse ( Mã X )","variant":"X93","unit":"Hộp","price":60000},
+    {"code":"X94","name":"Mi Đen Muse ( Mã X )","variant":"X94","unit":"Hộp","price":60000},
+    {"code":"X95","name":"Mi Đen Muse ( Mã X )","variant":"X95","unit":"Hộp","price":60000},
+    {"code":"X96","name":"Mi Đen Muse ( Mã X )","variant":"X96","unit":"Hộp","price":60000},
+    {"code":"X97","name":"Mi Đen Muse ( Mã X )","variant":"X97","unit":"Hộp","price":60000},
+    {"code":"X98","name":"Mi Đen Muse ( Mã X )","variant":"X98","unit":"Hộp","price":60000},
+    {"code":"X99","name":"Mi Đen Muse ( Mã X )","variant":"X99","unit":"Hộp","price":60000},
+    {"code":"X100","name":"Mi Đen Muse ( Mã X )","variant":"X100","unit":"Hộp","price":60000},
+    {"code":"X101","name":"Mi Đen Muse ( Mã X )","variant":"X101","unit":"Hộp","price":60000},
+    {"code":"X102","name":"Mi Đen Muse ( Mã X )","variant":"X102","unit":"Hộp","price":60000},
+    {"code":"X103","name":"Mi Đen Muse ( Mã X )","variant":"X103","unit":"Hộp","price":60000},
+    {"code":"X104","name":"Mi Đen Muse ( Mã X )","variant":"X104","unit":"Hộp","price":60000},
+    {"code":"X105","name":"Mi Đen Muse ( Mã X )","variant":"X105","unit":"Hộp","price":60000},
+    {"code":"X106","name":"Mi Đen Muse ( Mã X )","variant":"X106","unit":"Hộp","price":60000},
+    {"code":"X107","name":"Mi Đen Muse ( Mã X )","variant":"X107","unit":"Hộp","price":60000},
+    {"code":"X108","name":"Mi Đen Muse ( Mã X )","variant":"X108","unit":"Hộp","price":60000},
+    {"code":"X109","name":"Mi Đen Muse ( Mã X )","variant":"X109","unit":"Hộp","price":60000},
+    {"code":"X110","name":"Mi Đen Muse ( Mã X )","variant":"X110","unit":"Hộp","price":60000},
+    {"code":"X111","name":"Mi Đen Muse ( Mã X )","variant":"X111","unit":"Hộp","price":60000},
+    {"code":"X112","name":"Mi Đen Muse ( Mã X )","variant":"X112","unit":"Hộp","price":60000},
+    {"code":"X113","name":"Mi Đen Muse ( Mã X )","variant":"X113","unit":"Hộp","price":60000},
+    {"code":"X114","name":"Mi Đen Muse ( Mã X )","variant":"X114","unit":"Hộp","price":60000},
+    {"code":"X115","name":"Mi Đen Muse ( Mã X )","variant":"X115","unit":"Hộp","price":60000},
+    {"code":"X116","name":"Mi Đen Muse ( Mã X )","variant":"X116","unit":"Hộp","price":60000},
+    {"code":"X117","name":"Mi Đen Muse ( Mã X )","variant":"X117","unit":"Hộp","price":60000},
+    {"code":"X118","name":"Mi Đen Muse ( Mã X )","variant":"X118","unit":"Hộp","price":60000},
+    {"code":"X119","name":"Mi Đen Muse ( Mã X )","variant":"X119","unit":"Hộp","price":60000},
+    {"code":"X120","name":"Mi Đen Muse ( Mã X )","variant":"X120","unit":"Hộp","price":60000},
+    {"code":"X121","name":"Mi Đen Muse ( Mã X )","variant":"X121","unit":"Hộp","price":60000},
+    {"code":"X122","name":"Mi Đen Muse ( Mã X )","variant":"X122","unit":"Hộp","price":60000},
+    {"code":"X123","name":"Mi Đen Muse ( Mã X )","variant":"X123","unit":"Hộp","price":60000},
+    {"code":"X124","name":"Mi Đen Muse ( Mã X )","variant":"X124","unit":"Hộp","price":60000},
+    {"code":"X125","name":"Mi Đen Muse ( Mã X )","variant":"X125","unit":"Hộp","price":60000},
+    {"code":"X126","name":"Mi Đen Muse ( Mã X )","variant":"X126","unit":"Hộp","price":60000},
+    {"code":"X127","name":"Mi Đen Muse ( Mã X )","variant":"X127","unit":"Hộp","price":60000},
+    {"code":"X128","name":"Mi Đen Muse ( Mã X )","variant":"X128","unit":"Hộp","price":60000},
+    {"code":"X129","name":"Mi Đen Muse ( Mã X )","variant":"X129","unit":"Hộp","price":60000},
+    {"code":"X130","name":"Mi Đen Muse ( Mã X )","variant":"X130","unit":"Hộp","price":60000},
+    {"code":"X131","name":"Mi Đen Muse ( Mã X )","variant":"X131","unit":"Hộp","price":60000},
+    {"code":"X132","name":"Mi Đen Muse ( Mã X )","variant":"X132","unit":"Hộp","price":60000},
+    {"code":"X133","name":"Mi Đen Muse ( Mã X )","variant":"X133","unit":"Hộp","price":60000},
+    {"code":"X134","name":"Mi Đen Muse ( Mã X )","variant":"X134","unit":"Hộp","price":60000},
+    {"code":"B01","name":"Mi Nâu Muse ( Mã B )","variant":"B01","unit":"Hộp","price":60000},
+    {"code":"B02","name":"Mi Nâu Muse ( Mã B )","variant":"B02","unit":"Hộp","price":60000},
+    {"code":"B03","name":"Mi Nâu Muse ( Mã B )","variant":"B03","unit":"Hộp","price":60000},
+    {"code":"B04","name":"Mi Nâu Muse ( Mã B )","variant":"B04","unit":"Hộp","price":60000},
+    {"code":"B05","name":"Mi Nâu Muse ( Mã B )","variant":"B05","unit":"Hộp","price":60000},
+    {"code":"B06","name":"Mi Nâu Muse ( Mã B )","variant":"B06","unit":"Hộp","price":60000},
+    {"code":"B07","name":"Mi Nâu Muse ( Mã B )","variant":"B07","unit":"Hộp","price":60000},
+    {"code":"B08","name":"Mi Nâu Muse ( Mã B )","variant":"B08","unit":"Hộp","price":60000},
+    {"code":"B09","name":"Mi Nâu Muse ( Mã B )","variant":"B09","unit":"Hộp","price":60000},
+    {"code":"B10","name":"Mi Nâu Muse ( Mã B )","variant":"B10","unit":"Hộp","price":60000},
+    {"code":"B11","name":"Mi Nâu Muse ( Mã B )","variant":"B11","unit":"Hộp","price":60000},
+    {"code":"B12","name":"Mi Nâu Muse ( Mã B )","variant":"B12","unit":"Hộp","price":60000},
+    {"code":"B13","name":"Mi Nâu Muse ( Mã B )","variant":"B13","unit":"Hộp","price":60000},
+    {"code":"B14","name":"Mi Nâu Muse ( Mã B )","variant":"B14","unit":"Hộp","price":60000},
+    {"code":"B15","name":"Mi Nâu Muse ( Mã B )","variant":"B15","unit":"Hộp","price":60000},
+    {"code":"B16","name":"Mi Nâu Muse ( Mã B )","variant":"B16","unit":"Hộp","price":60000},
+    {"code":"B17","name":"Mi Nâu Muse ( Mã B )","variant":"B17","unit":"Hộp","price":60000},
+    {"code":"B18","name":"Mi Nâu Muse ( Mã B )","variant":"B18","unit":"Hộp","price":60000},
+    {"code":"B19","name":"Mi Nâu Muse ( Mã B )","variant":"B19","unit":"Hộp","price":60000},
+    {"code":"B20","name":"Mi Nâu Muse ( Mã B )","variant":"B20","unit":"Hộp","price":60000},
+    {"code":"B21","name":"Mi Nâu Muse ( Mã B )","variant":"B21","unit":"Hộp","price":60000},
+    {"code":"B22","name":"Mi Nâu Muse ( Mã B )","variant":"B22","unit":"Hộp","price":60000},
+    {"code":"B23","name":"Mi Nâu Muse ( Mã B )","variant":"B23","unit":"Hộp","price":60000},
+    {"code":"B24","name":"Mi Nâu Muse ( Mã B )","variant":"B24","unit":"Hộp","price":60000},
+    {"code":"B25","name":"Mi Nâu Muse ( Mã B )","variant":"B25","unit":"Hộp","price":60000},
+    {"code":"B26","name":"Mi Nâu Muse ( Mã B )","variant":"B26","unit":"Hộp","price":60000},
+    {"code":"B27","name":"Mi Nâu Muse ( Mã B )","variant":"B27","unit":"Hộp","price":60000},
+    {"code":"B28","name":"Mi Nâu Muse ( Mã B )","variant":"B28","unit":"Hộp","price":60000},
+    {"code":"B29","name":"Mi Nâu Muse ( Mã B )","variant":"B29","unit":"Hộp","price":60000},
+    {"code":"B30","name":"Mi Nâu Muse ( Mã B )","variant":"B30","unit":"Hộp","price":60000},
+    {"code":"B31","name":"Mi Nâu Muse ( Mã B )","variant":"B31","unit":"Hộp","price":60000},
+    {"code":"B32","name":"Mi Nâu Muse ( Mã B )","variant":"B32","unit":"Hộp","price":60000},
+    {"code":"B33","name":"Mi Nâu Muse ( Mã B )","variant":"B33","unit":"Hộp","price":60000},
+    {"code":"B34","name":"Mi Nâu Muse ( Mã B )","variant":"B34","unit":"Hộp","price":60000},
+    {"code":"B35","name":"Mi Nâu Muse ( Mã B )","variant":"B35","unit":"Hộp","price":60000},
+    {"code":"B38","name":"Mi Nâu Muse ( Mã B )","variant":"B38","unit":"Hộp","price":60000},
+    {"code":"B39","name":"Mi Nâu Muse ( Mã B )","variant":"B39","unit":"Hộp","price":60000},
+    {"code":"B40","name":"Mi Nâu Muse ( Mã B )","variant":"B40","unit":"Hộp","price":60000},
+    {"code":"B41","name":"Mi Nâu Muse ( Mã B )","variant":"B41","unit":"Hộp","price":60000},
+    {"code":"B42","name":"Mi Nâu Muse ( Mã B )","variant":"B42","unit":"Hộp","price":60000},
+    {"code":"B43","name":"Mi Nâu Muse ( Mã B )","variant":"B43","unit":"Hộp","price":60000},
+    {"code":"B49","name":"Mi Nâu Muse ( Mã B )","variant":"B49","unit":"Hộp","price":60000},
+    {"code":"MG01","name":"Mi Gân Muse ( Mã MG )","variant":"MG01","unit":"Hộp","price":50000},
+    {"code":"MG02","name":"Mi Gân Muse ( Mã MG )","variant":"MG02","unit":"Hộp","price":50000},
+    {"code":"MG03","name":"Mi Gân Muse ( Mã MG )","variant":"MG03","unit":"Hộp","price":50000},
+    {"code":"MG04","name":"Mi Gân Muse ( Mã MG )","variant":"MG04","unit":"Hộp","price":50000},
+    {"code":"MG05","name":"Mi Gân Muse ( Mã MG )","variant":"MG05","unit":"Hộp","price":50000},
+    {"code":"MG06","name":"Mi Gân Muse ( Mã MG )","variant":"MG06","unit":"Hộp","price":50000},
+    {"code":"MG07","name":"Mi Gân Muse ( Mã MG )","variant":"MG07","unit":"Hộp","price":50000},
+    {"code":"MG08","name":"Mi Gân Muse ( Mã MG )","variant":"MG08","unit":"Hộp","price":50000},
+    {"code":"MG09","name":"Mi Gân Muse ( Mã MG )","variant":"MG09","unit":"Hộp","price":50000},
+    {"code":"MG10","name":"Mi Gân Muse ( Mã MG )","variant":"MG10","unit":"Hộp","price":50000},
+    {"code":"MG11","name":"Mi Gân Muse ( Mã MG )","variant":"MG11","unit":"Hộp","price":50000},
+    {"code":"MG12","name":"Mi Gân Muse ( Mã MG )","variant":"MG12","unit":"Hộp","price":50000},
+    {"code":"MG13","name":"Mi Gân Muse ( Mã MG )","variant":"MG13","unit":"Hộp","price":50000},
+    {"code":"MG14","name":"Mi Gân Muse ( Mã MG )","variant":"MG14","unit":"Hộp","price":50000},
+    {"code":"MG15","name":"Mi Gân Muse ( Mã MG )","variant":"MG15","unit":"Hộp","price":50000},
+    {"code":"MG16","name":"Mi Gân Muse ( Mã MG )","variant":"MG16","unit":"Hộp","price":50000},
+    {"code":"MG17","name":"Mi Gân Muse ( Mã MG )","variant":"MG17","unit":"Hộp","price":50000},
+    {"code":"MG18","name":"Mi Gân Muse ( Mã MG )","variant":"MG18","unit":"Hộp","price":50000},
+    {"code":"MG19","name":"Mi Gân Muse ( Mã MG )","variant":"MG19","unit":"Hộp","price":50000},
+    {"code":"MG20","name":"Mi Gân Muse ( Mã MG )","variant":"MG20","unit":"Hộp","price":50000},
+    {"code":"MG21","name":"Mi Gân Muse ( Mã MG )","variant":"MG21","unit":"Hộp","price":50000},
+    {"code":"MG22","name":"Mi Gân Muse ( Mã MG )","variant":"MG22","unit":"Hộp","price":50000},
+    {"code":"MG23","name":"Mi Gân Muse ( Mã MG )","variant":"MG23","unit":"Hộp","price":50000},
+    {"code":"MG24","name":"Mi Gân Muse ( Mã MG )","variant":"MG24","unit":"Hộp","price":50000},
+    {"code":"MG25","name":"Mi Gân Muse ( Mã MG )","variant":"MG25","unit":"Hộp","price":50000},
+    {"code":"MG26","name":"Mi Gân Muse ( Mã MG )","variant":"MG26","unit":"Hộp","price":50000},
+    {"code":"MG27","name":"Mi Gân Muse ( Mã MG )","variant":"MG27","unit":"Hộp","price":50000},
+    {"code":"MG28","name":"Mi Gân Muse ( Mã MG )","variant":"MG28","unit":"Hộp","price":50000},
+    {"code":"MG29","name":"Mi Gân Muse ( Mã MG )","variant":"MG29","unit":"Hộp","price":50000},
+    {"code":"MG30","name":"Mi Gân Muse ( Mã MG )","variant":"MG30","unit":"Hộp","price":50000},
+    {"code":"MG31","name":"Mi Gân Muse ( Mã MG )","variant":"MG31","unit":"Hộp","price":50000},
+    {"code":"MG32","name":"Mi Gân Muse ( Mã MG )","variant":"MG32","unit":"Hộp","price":50000},
+    {"code":"MG33","name":"Mi Gân Muse ( Mã MG )","variant":"MG33","unit":"Hộp","price":50000},
+    {"code":"MG34","name":"Mi Gân Muse ( Mã MG )","variant":"MG34","unit":"Hộp","price":50000},
+    {"code":"MG35","name":"Mi Gân Muse ( Mã MG )","variant":"MG35","unit":"Hộp","price":50000},
+    {"code":"MG36","name":"Mi Gân Muse ( Mã MG )","variant":"MG36","unit":"Hộp","price":50000},
+    {"code":"MG37","name":"Mi Gân Muse ( Mã MG )","variant":"MG37","unit":"Hộp","price":50000},
+    {"code":"MG38","name":"Mi Gân Muse ( Mã MG )","variant":"MG38","unit":"Hộp","price":50000},
+    {"code":"MG39","name":"Mi Gân Muse ( Mã MG )","variant":"MG39","unit":"Hộp","price":50000},
+    {"code":"MG40","name":"Mi Gân Muse ( Mã MG )","variant":"MG40","unit":"Hộp","price":50000},
+    {"code":"MG41","name":"Mi Gân Muse ( Mã MG )","variant":"MG41","unit":"Hộp","price":50000},
+    {"code":"MG42","name":"Mi Gân Muse ( Mã MG )","variant":"MG42","unit":"Hộp","price":50000},
+    {"code":"MG43","name":"Mi Gân Muse ( Mã MG )","variant":"MG43","unit":"Hộp","price":50000},
+    {"code":"MG44","name":"Mi Gân Muse ( Mã MG )","variant":"MG44","unit":"Hộp","price":50000},
+    {"code":"MG45","name":"Mi Gân Muse ( Mã MG )","variant":"MG45","unit":"Hộp","price":50000},
+    {"code":"MG46","name":"Mi Gân Muse ( Mã MG )","variant":"MG46","unit":"Hộp","price":50000},
+    {"code":"MG47","name":"Mi Gân Muse ( Mã MG )","variant":"MG47","unit":"Hộp","price":50000},
+    {"code":"MG48","name":"Mi Gân Muse ( Mã MG )","variant":"MG48","unit":"Hộp","price":50000},
+    {"code":"MG49","name":"Mi Gân Muse ( Mã MG )","variant":"MG49","unit":"Hộp","price":50000},
+    {"code":"MG50","name":"Mi Gân Muse ( Mã MG )","variant":"MG50","unit":"Hộp","price":50000},
+    {"code":"MG51","name":"Mi Gân Muse ( Mã MG )","variant":"MG51","unit":"Hộp","price":50000},
+    {"code":"MG52","name":"Mi Gân Muse ( Mã MG )","variant":"MG52","unit":"Hộp","price":50000},
+    {"code":"MG53","name":"Mi Gân Muse ( Mã MG )","variant":"MG53","unit":"Hộp","price":50000},
+    {"code":"MG54","name":"Mi Gân Muse ( Mã MG )","variant":"MG54","unit":"Hộp","price":50000},
+    {"code":"MG55","name":"Mi Gân Muse ( Mã MG )","variant":"MG55","unit":"Hộp","price":50000},
+    {"code":"MG56","name":"Mi Gân Muse ( Mã MG )","variant":"MG56","unit":"Hộp","price":50000},
+    {"code":"MG57","name":"Mi Gân Muse ( Mã MG )","variant":"MG57","unit":"Hộp","price":50000},
+    {"code":"MG58","name":"Mi Gân Muse ( Mã MG )","variant":"MG58","unit":"Hộp","price":50000},
+    {"code":"MG59","name":"Mi Gân Muse ( Mã MG )","variant":"MG59","unit":"Hộp","price":50000},
+    {"code":"MG60","name":"Mi Gân Muse ( Mã MG )","variant":"MG60","unit":"Hộp","price":50000},
+    {"code":"MG61","name":"Mi Gân Muse ( Mã MG )","variant":"MG61","unit":"Hộp","price":50000},
+    {"code":"MG62","name":"Mi Gân Muse ( Mã MG )","variant":"MG62","unit":"Hộp","price":50000},
+    {"code":"MG63","name":"Mi Gân Muse ( Mã MG )","variant":"MG63","unit":"Hộp","price":50000},
+    {"code":"MG64","name":"Mi Gân Muse ( Mã MG )","variant":"MG64","unit":"Hộp","price":50000},
+    {"code":"MG65","name":"Mi Gân Muse ( Mã MG )","variant":"MG65","unit":"Hộp","price":50000},
+    {"code":"MG66","name":"Mi Gân Muse ( Mã MG )","variant":"MG66","unit":"Hộp","price":50000},
+    {"code":"MG67","name":"Mi Gân Muse ( Mã MG )","variant":"MG67","unit":"Hộp","price":50000},
+    {"code":"MG68","name":"Mi Gân Muse ( Mã MG )","variant":"MG68","unit":"Hộp","price":50000},
+    {"code":"MG69","name":"Mi Gân Muse ( Mã MG )","variant":"MG69","unit":"Hộp","price":50000},
+    {"code":"MG70","name":"Mi Gân Muse ( Mã MG )","variant":"MG70","unit":"Hộp","price":50000},
+    {"code":"MG71","name":"Mi Gân Muse ( Mã MG )","variant":"MG71","unit":"Hộp","price":50000},
+    {"code":"MG72","name":"Mi Gân Muse ( Mã MG )","variant":"MG72","unit":"Hộp","price":50000},
+    {"code":"MG73","name":"Mi Gân Muse ( Mã MG )","variant":"MG73","unit":"Hộp","price":50000},
+    {"code":"MG74","name":"Mi Gân Muse ( Mã MG )","variant":"MG74","unit":"Hộp","price":50000},
+    {"code":"MG75","name":"Mi Gân Muse ( Mã MG )","variant":"MG75","unit":"Hộp","price":50000},
+    {"code":"MG76","name":"Mi Gân Muse ( Mã MG )","variant":"MG76","unit":"Hộp","price":50000},
+    {"code":"MG77","name":"Mi Gân Muse ( Mã MG )","variant":"MG77","unit":"Hộp","price":50000},
+    {"code":"MG78","name":"Mi Gân Muse ( Mã MG )","variant":"MG78","unit":"Hộp","price":50000},
+    {"code":"MG79","name":"Mi Gân Muse ( Mã MG )","variant":"MG79","unit":"Hộp","price":50000},
+    {"code":"MG80","name":"Mi Gân Muse ( Mã MG )","variant":"MG80","unit":"Hộp","price":50000},
+    {"code":"MG81","name":"Mi Gân Muse ( Mã MG )","variant":"MG81","unit":"Hộp","price":50000},
+    {"code":"MG82","name":"Mi Gân Muse ( Mã MG )","variant":"MG82","unit":"Hộp","price":50000},
+    {"code":"MG83","name":"Mi Gân Muse ( Mã MG )","variant":"MG83","unit":"Hộp","price":50000},
+    {"code":"NA01","name":"Mi Gân Nâu Muse ( Mã NA )","variant":"NA01","unit":"Hộp","price":50000},
+    {"code":"NA02","name":"Mi Gân Nâu Muse ( Mã NA )","variant":"NA02","unit":"Hộp","price":50000},
+    {"code":"NA03","name":"Mi Gân Nâu Muse ( Mã NA )","variant":"NA03","unit":"Hộp","price":50000},
+    {"code":"NA04","name":"Mi Gân Nâu Muse ( Mã NA )","variant":"NA04","unit":"Hộp","price":50000},
+    {"code":"NA06","name":"Mi Gân Nâu Muse ( Mã NA )","variant":"NA06","unit":"Hộp","price":50000},
+    {"code":"Mặc định","name":"Keo Giver 5ml","variant":"Mặc định","unit":"Hộp","price":60000},
+    {"code":"Mặc định","name":"Keo Muse","variant":"Mặc định","unit":"Hộp","price":56000},
+    {"code":"Mặc định","name":"Keo Giver 4ml","variant":"Mặc định","unit":"Hộp","price":46000},
+    {"code":"Mặc định","name":"Keo XIXI","variant":"Mặc định","unit":"Hộp","price":34000},
+    {"code":"Mặc định","name":"Nước Tẩy Trang The Giver","variant":"Mặc định","unit":"Hộp","price":48000},
+    {"code":"Mặc định","name":"Khay Trộn Nền","variant":"Mặc định","unit":"Hộp","price":36500},
+    {"code":"Lược Đánh Rối 8613","name":"Lược Tony&Guy","variant":"Lược Đánh Rối 8613","unit":"Hộp","price":26500},
+    {"code":"Lược Chải Mịn 06700","name":"Lược Tony&Guy","variant":"Lược Chải Mịn 06700","unit":"Hộp","price":26500},
+    {"code":"Lược 06400","name":"Lược Tony&Guy","variant":"Lược 06400","unit":"Hộp","price":26500},
+    {"code":"6969","name":"Lược Tony&Guy","variant":"6969","unit":"Hộp","price":26500},
+    {"code":"Lược Cá Mập 0946","name":"Lược Tony&Guy","variant":"Lược Cá Mập 0946","unit":"Hộp","price":26500},
+    {"code":"Trắng (Đầu Thẳng)","name":"Kéo Tỉa Mi Giả","variant":"Trắng (Đầu Thẳng)","unit":"Hộp","price":34000},
+    {"code":"Hồng (Đầu Cong)","name":"Kéo Tỉa Mi Giả","variant":"Hồng (Đầu Cong)","unit":"Hộp","price":34000},
+    {"code":"Xanh (Đầu Tròn)","name":"Kéo Tỉa Mi Giả","variant":"Xanh (Đầu Tròn)","unit":"Hộp","price":34000},
+    {"code":"S01","name":"Mi Gân Ballet","variant":"S01","unit":"Hộp","price":33000},
+    {"code":"A80","name":"Mi Gân Ballet","variant":"A80","unit":"Hộp","price":33000},
+    {"code":"A89","name":"Mi Gân Ballet","variant":"A89","unit":"Hộp","price":33000},
+    {"code":"A91","name":"Mi Gân Ballet","variant":"A91","unit":"Hộp","price":33000},
+    {"code":"G018","name":"Mi Gân APEX","variant":"G018","unit":"Hộp","price":50000},
+    {"code":"G024","name":"Mi Gân APEX","variant":"G024","unit":"Hộp","price":50000},
+    {"code":"G031","name":"Mi Gân APEX","variant":"G031","unit":"Hộp","price":50000},
+    {"code":"G037","name":"Mi Gân APEX","variant":"G037","unit":"Hộp","price":50000},
+    {"code":"G038","name":"Mi Gân APEX","variant":"G038","unit":"Hộp","price":50000},
+    {"code":"G041","name":"Mi Gân APEX","variant":"G041","unit":"Hộp","price":50000},
+    {"code":"G043","name":"Mi Gân APEX","variant":"G043","unit":"Hộp","price":50000},
+    {"code":"G044","name":"Mi Gân APEX","variant":"G044","unit":"Hộp","price":50000},
+    {"code":"Màu Xanh Dành Mắt Cho Mí Sụp","name":"Kích Mí Mlen Diary (Bản Cao Cấp)","variant":"Màu Xanh Dành Mắt Cho Mí Sụp","unit":"Hộp","price":50000},
+    {"code":"Màu Hồng Dành Cho Mắt 1 Mí","name":"Kích Mí Mlen Diary (Bản Cao Cấp)","variant":"Màu Hồng Dành Cho Mắt 1 Mí","unit":"Hộp","price":50000},
+    {"code":"Màu Vàng Đa N  ng","name":"Kích Mí Mlen Diary (Bản Cao Cấp)","variant":"Màu Vàng Đa N  ng","unit":"Hộp","price":50000},
+    {"code":"Màu Cam Dành Cho Mắt Mí Lót","name":"Kích Mí Mlen Diary (Bản Cao Cấp)","variant":"Màu Cam Dành Cho Mắt Mí Lót","unit":"Hộp","price":50000},
+    {"code":"Kích Mí Đa Mí","name":"Kích Mí Mlen Diary (Bản Thường)","variant":"Kích Mí Đa Mí","unit":"Hộp","price":50000},
+    {"code":"Kích Mí Mắt Mí Sụp","name":"Kích Mí Mlen Diary (Bản Thường)","variant":"Kích Mí Mắt Mí Sụp","unit":"Hộp","price":50000},
+    {"code":"Kích Mí Mắt Sưng","name":"Kích Mí Mlen Diary (Bản Thường)","variant":"Kích Mí Mắt Sưng","unit":"Hộp","price":50000},
+    {"code":"Kích Mí Mắt 1 Mí","name":"Kích Mí Mlen Diary (Bản Thường)","variant":"Kích Mí Mắt 1 Mí","unit":"Hộp","price":50000},
+    {"code":"Kích Mí Mắt Mí Lót","name":"Kích Mí Mlen Diary (Bản Thường)","variant":"Kích Mí Mắt Mí Lót","unit":"Hộp","price":50000},
+    {"code":"Mặc định","name":"Bấm Mi Hồng","variant":"Mặc định","unit":"Hộp","price":30000},
+    {"code":"Hồng nhạt (nhỏ ngắn)","name":"Kích Mí Keli","variant":"Hồng nhạt (nhỏ ngắn)","unit":"Hộp","price":42000},
+    {"code":"Xanh dương(bản to)","name":"Kích Mí Keli","variant":"Xanh dương(bản to)","unit":"Hộp","price":42000},
+    {"code":"Hồng đậm (bản vừa)","name":"Kích Mí Keli","variant":"Hồng đậm (bản vừa)","unit":"Hộp","price":42000},
+    {"code":"Xanh lá (nhỏ dài)","name":"Kích Mí Keli","variant":"Xanh lá (nhỏ dài)","unit":"Hộp","price":42000},
+    {"code":"E02","name":"Mi Gân Đen Muse ( Mã E )","variant":"E02","unit":"Hộp","price":50000},
+    {"code":"E15","name":"Mi Gân Đen Muse ( Mã E )","variant":"E15","unit":"Hộp","price":50000},
+    {"code":"Mặc định","name":"Nhíp Gắn Mi Không Dính Keo","variant":"Mặc định","unit":"Hộp","price":30000},
+    {"code":"Nhíp dài đầu nhọn","name":"Nhíp Gắn Mi MengLu Phủ Nano Không Dính Keo","variant":"Nhíp dài đầu nhọn","unit":"Hộp","price":33000},
+    {"code":"Nhíp dài đầu tròn","name":"Nhíp Gắn Mi MengLu Phủ Nano Không Dính Keo","variant":"Nhíp dài đầu tròn","unit":"Hộp","price":33000},
+    {"code":"Nhíp ngắn đầu tròn","name":"Nhíp Gắn Mi MengLu Phủ Nano Không Dính Keo","variant":"Nhíp ngắn đầu tròn","unit":"Hộp","price":33000},
+    {"code":"K1","name":"Mi Giả Cụm The Giver","variant":"K1","unit":"Hộp","price":33000},
+    {"code":"K3","name":"Mi Giả Cụm The Giver","variant":"K3","unit":"Hộp","price":33000},
+    {"code":"K5","name":"Mi Giả Cụm The Giver","variant":"K5","unit":"Hộp","price":33000},
+    {"code":"K12","name":"Mi Giả Cụm The Giver","variant":"K12","unit":"Hộp","price":33000},
+    {"code":"K12 Plus","name":"Mi Giả Cụm The Giver","variant":"K12 Plus","unit":"Hộp","price":33000},
+    {"code":"K13","name":"Mi Giả Cụm The Giver","variant":"K13","unit":"Hộp","price":33000},
+    {"code":"K13 Plus","name":"Mi Giả Cụm The Giver","variant":"K13 Plus","unit":"Hộp","price":33000},
+    {"code":"K14","name":"Mi Giả Cụm The Giver","variant":"K14","unit":"Hộp","price":33000},
+    {"code":"K15","name":"Mi Giả Cụm The Giver","variant":"K15","unit":"Hộp","price":33000},
+    {"code":"K17 Mi Dưới","name":"Mi Giả Cụm The Giver","variant":"K17 Mi Dưới","unit":"Hộp","price":33000},
+    {"code":"K25","name":"Mi Giả Cụm The Giver","variant":"K25","unit":"Hộp","price":33000},
+    {"code":"K28","name":"Mi Giả Cụm The Giver","variant":"K28","unit":"Hộp","price":33000},
+    {"code":"K32","name":"Mi Giả Cụm The Giver","variant":"K32","unit":"Hộp","price":33000},
+    {"code":"K36","name":"Mi Giả Cụm The Giver","variant":"K36","unit":"Hộp","price":33000},
+    {"code":"K41","name":"Mi Giả Cụm The Giver","variant":"K41","unit":"Hộp","price":33000},
+    {"code":"K42","name":"Mi Giả Cụm The Giver","variant":"K42","unit":"Hộp","price":33000},
+    {"code":"K43","name":"Mi Giả Cụm The Giver","variant":"K43","unit":"Hộp","price":33000},
+    {"code":"K44","name":"Mi Giả Cụm The Giver","variant":"K44","unit":"Hộp","price":33000},
+    {"code":"K45","name":"Mi Giả Cụm The Giver","variant":"K45","unit":"Hộp","price":33000},
+    {"code":"K46","name":"Mi Giả Cụm The Giver","variant":"K46","unit":"Hộp","price":33000},
+    {"code":"K48","name":"Mi Giả Cụm The Giver","variant":"K48","unit":"Hộp","price":33000},
+    {"code":"K51","name":"Mi Giả Cụm The Giver","variant":"K51","unit":"Hộp","price":33000},
+    {"code":"K53","name":"Mi Giả Cụm The Giver","variant":"K53","unit":"Hộp","price":33000},
+    {"code":"K54","name":"Mi Giả Cụm The Giver","variant":"K54","unit":"Hộp","price":33000},
+    {"code":"K55","name":"Mi Giả Cụm The Giver","variant":"K55","unit":"Hộp","price":33000},
+    {"code":"K56","name":"Mi Giả Cụm The Giver","variant":"K56","unit":"Hộp","price":33000},
+    {"code":"K57","name":"Mi Giả Cụm The Giver","variant":"K57","unit":"Hộp","price":33000},
+    {"code":"K60","name":"Mi Giả Cụm The Giver","variant":"K60","unit":"Hộp","price":33000},
+    {"code":"K62 Mi Dưới","name":"Mi Giả Cụm The Giver","variant":"K62 Mi Dưới","unit":"Hộp","price":33000},
+    {"code":"K63","name":"Mi Giả Cụm The Giver","variant":"K63","unit":"Hộp","price":33000},
+    {"code":"K67","name":"Mi Giả Cụm The Giver","variant":"K67","unit":"Hộp","price":33000},
+    {"code":"MIX 6","name":"Mi Giả Cụm The Giver","variant":"MIX 6","unit":"Hộp","price":33000},
+    {"code":"MIX 7","name":"Mi Giả Cụm The Giver","variant":"MIX 7","unit":"Hộp","price":33000},
+    {"code":"MIX Mi Dưới 2","name":"Mi Giả Cụm The Giver","variant":"MIX Mi Dưới 2","unit":"Hộp","price":33000}
+  ];
 
     const DEFAULT_CUSTOMERS = [];
 
@@ -1072,14 +1400,24 @@
       shopPhone: "0388.054.613",
       shopAddress: "Ấp Tân Hòa, Xã Hóc Môn, Thành phố Hồ Chí Minh",
       shopFooterNote: "Cảm ơn quý khách đã tin tưởng và ủng hộ Toboko Store!",
-      sheetApiUrl: ""
+      sheetApiUrl: "https://script.google.com/macros/s/AKfycbyu77ZRFca0pFXZPnfwn3gISQRbXOp5x-TCDg6RKGR_beG8zargaNKB0SoqI9bwwf8/exec"
     };
 
     const DEFAULT_SHIP_FEE = 14000;
 
     let state = {
-      settings: JSON.parse(localStorage.getItem('tbk_settings')) || DEFAULT_SETTINGS,
-      products: JSON.parse(localStorage.getItem('tbk_products_v2')) || DEFAULT_PRODUCTS,
+      settings: (() => {
+        const saved = JSON.parse(localStorage.getItem('tbk_settings') || '{}');
+        return {
+          ...DEFAULT_SETTINGS,
+          ...saved,
+          sheetApiUrl: (saved && saved.sheetApiUrl) ? saved.sheetApiUrl : DEFAULT_SETTINGS.sheetApiUrl
+        };
+      })(),
+      products: (() => {
+        const saved = JSON.parse(localStorage.getItem('tbk_products_v2') || '[]');
+        return (Array.isArray(saved) && saved.length > 4) ? saved : DEFAULT_PRODUCTS;
+      })(),
       customers: JSON.parse(localStorage.getItem('tbk_customers')) || DEFAULT_CUSTOMERS,
       orders: JSON.parse(localStorage.getItem('tbk_orders')) || [],
       currentOrder: {
@@ -1177,9 +1515,18 @@
       return finalStr.charAt(0).toUpperCase() + finalStr.slice(1) + ' đồng';
     }
 
+    function normalizeText(str) {
+      return String(str || '')
+        .trim()
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/đ/g, 'd')
+        .replace(/Đ/g, 'd');
+    }
+
     function slugify(text) {
-      return text.toString().toLowerCase()
-        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      return normalizeText(text)
         .replace(/[^\w\s-]/g, '')
         .replace(/[\s_-]+/g, '-')
         .replace(/^-+|-+$/g, '');
@@ -1300,8 +1647,9 @@
      * KHỞI TẠO APP
      */
     window.addEventListener('DOMContentLoaded', () => {
-      if (!localStorage.getItem('tbk_products_v2')) {
+      if (!localStorage.getItem('tbk_products_v2') || JSON.parse(localStorage.getItem('tbk_products_v2') || '[]').length <= 4) {
         localStorage.setItem('tbk_products_v2', JSON.stringify(DEFAULT_PRODUCTS));
+        state.products = DEFAULT_PRODUCTS;
       }
       if (!localStorage.getItem('tbk_customers')) {
         localStorage.setItem('tbk_customers', JSON.stringify(DEFAULT_CUSTOMERS));
@@ -1313,6 +1661,11 @@
       initPwaAssets();
       handleWindowResize();
       window.addEventListener('resize', handleWindowResize);
+
+      // Tự động đồng bộ ngầm danh mục mới nhất từ Google Sheet khi mở app
+      if (state.settings.sheetApiUrl && state.settings.sheetApiUrl.startsWith('https://script.google.com/')) {
+        setTimeout(() => syncWithGoogleSheet(true), 800);
+      }
 
       document.getElementById('inputCustName').addEventListener('input', (e) => {
         state.currentOrder.customer.name = e.target.value;
@@ -1376,8 +1729,9 @@
      */
     function initPwaAssets() {
       try {
+        const logoUrl = "https://raw.githubusercontent.com/Tuanle1929/Toboko-Store/refs/heads/main/Logo%20Toboko.jpg";
         const appleIcon = document.getElementById('appleTouchIconLink');
-        if (appleIcon) appleIcon.href = 'logo.jpg';
+        if (appleIcon) appleIcon.href = logoUrl;
 
         const manifestObj = {
           name: "Tạo Đơn Đặt Hàng Toboko",
@@ -1386,7 +1740,7 @@
           display: "standalone",
           background_color: "#ffffff",
           theme_color: "#ffffff",
-          icons: [{ src: "logo.jpg", sizes: "192x192", type: "image/jpeg" }]
+          icons: [{ src: logoUrl, sizes: "192x192", type: "image/jpeg" }]
         };
         const manifestBlob = new Blob([JSON.stringify(manifestObj)], { type: 'application/json' });
         const manifestLink = document.getElementById('webManifestLink');
@@ -2049,9 +2403,6 @@
     let activeRowSuggest = { rowIndex: -1, field: '', matches: [], selectedIndex: -1 };
     let lastRowFocusTime = 0;
 
-    function normalizeText(str) {
-      return String(str || '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    }
 
     function handleRowProductSearch(rowIndex, field, keyword, inputElem) {
       const box = document.getElementById('rowProductSuggestionsBox');
@@ -2238,11 +2589,11 @@
         return;
       }
 
-      const q = keyword.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      const q = normalizeText(keyword);
       currentProductMatches = state.products.filter(p => {
-        const nameNorm = (p.name || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        const codeNorm = (p.code || '').toLowerCase();
-        const varNorm = (p.variant || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const nameNorm = normalizeText(p.name);
+        const codeNorm = normalizeText(p.code);
+        const varNorm = normalizeText(p.variant);
         return nameNorm.includes(q) || codeNorm.includes(q) || varNorm.includes(q);
       }).slice(0, 30);
 
@@ -2371,9 +2722,9 @@
         return;
       }
 
-      const q = keyword.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      const q = normalizeText(keyword);
       currentCustomerMatches = state.customers.filter(c => {
-        const nameNorm = (c.name || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const nameNorm = normalizeText(c.name);
         const phoneClean = (c.phone || '').replace(/\D/g, '');
         return nameNorm.includes(q) || phoneClean.includes(q);
       }).slice(0, 8);
@@ -2509,22 +2860,22 @@
         const tr = document.createElement('tr');
         tr.className = (index % 2 === 1) ? "bg-slate-50/70" : "";
         tr.innerHTML = `
-          <td class="py-2.5 px-1 text-center font-bold text-slate-500">${index + 1}</td>
-          <td class="py-2.5 px-2 text-left">
-            <div class="font-bold text-slate-900 text-xs">${escapeHtml(item.name || 'Sản phẩm ' + (index + 1))}</div>
-            ${item.variant ? `<div class="text-[11px] text-slate-500 font-normal mt-0.5">Phân loại: ${escapeHtml(item.variant)}</div>` : ''}
+          <td class="py-2.5 px-1 text-center font-bold text-slate-500 align-bottom text-xs leading-tight">${index + 1}</td>
+          <td class="py-2.5 px-2 text-left align-bottom">
+            <div class="font-bold text-slate-900 text-xs leading-tight">${escapeHtml(item.name || 'Sản phẩm ' + (index + 1))}</div>
+            ${item.variant ? `<div class="text-[11px] text-slate-500 font-normal mt-0.5 leading-tight">Phân loại: ${escapeHtml(item.variant)}</div>` : ''}
           </td>
-          <td class="py-2.5 px-1 text-center text-slate-600">${escapeHtml(item.unit || 'Hộp')}</td>
-          <td class="py-2.5 px-1 text-center font-black text-slate-900">${qty}</td>
-          <td class="py-2.5 px-2 text-right">
+          <td class="py-2.5 px-1 text-center text-slate-600 align-bottom text-xs leading-tight">${escapeHtml(item.unit || 'Hộp')}</td>
+          <td class="py-2.5 px-1 text-center font-black text-slate-900 align-bottom text-xs leading-tight">${qty}</td>
+          <td class="py-2.5 px-2 text-right align-bottom">
             ${showOriginal && hasDiscount ? `
-              <div class="text-[10px] text-slate-400 line-through leading-tight">${new Intl.NumberFormat('vi-VN').format(basePrice)} đ</div>
+              <div class="text-[10px] text-slate-400 line-through leading-tight mb-0.5">${new Intl.NumberFormat('vi-VN').format(basePrice)} đ</div>
               <div class="font-bold text-slate-900 text-xs leading-tight">${new Intl.NumberFormat('vi-VN').format(discountedPrice)} đ</div>
             ` : `
-              <span class="font-semibold text-slate-800 text-xs">${new Intl.NumberFormat('vi-VN').format(discountedPrice)} đ</span>
+              <div class="font-semibold text-slate-800 text-xs leading-tight">${new Intl.NumberFormat('vi-VN').format(discountedPrice)} đ</div>
             `}
           </td>
-          <td class="py-2.5 px-2 text-right font-black text-slate-950">${new Intl.NumberFormat('vi-VN').format(lineTotal)} đ</td>
+          <td class="py-2.5 px-2 text-right font-black text-slate-950 align-bottom text-xs leading-tight">${new Intl.NumberFormat('vi-VN').format(lineTotal)} đ</td>
         `;
         invTbody.appendChild(tr);
       });
@@ -2643,7 +2994,16 @@
           scale: 2,
           useCORS: true,
           backgroundColor: '#ffffff',
-          logging: false
+          logging: false,
+          onclone: (clonedDoc) => {
+            const b = clonedDoc.getElementById('invOrderBadge');
+            if (b) {
+              b.style.display = 'inline-block';
+              b.style.paddingTop = '0px';
+              b.style.paddingBottom = '12px';
+              b.style.lineHeight = '1';
+            }
+          }
         });
 
         // Khôi phục lại tỷ lệ hiển thị trên màn hình điện thoại
@@ -2779,13 +3139,13 @@
      */
     function renderProductsTable() {
       const tbody = document.getElementById('productsTableBody');
-      const search = (document.getElementById('searchProdTableInput').value || '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      const search = normalizeText(document.getElementById('searchProdTableInput').value);
 
       const filtered = state.products.filter(p => {
         if (!search) return true;
-        const nameNorm = (p.name || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const nameNorm = normalizeText(p.name);
         const codeNorm = (p.code || '').toLowerCase();
-        const varNorm = (p.variant || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const varNorm = normalizeText(p.variant);
         return nameNorm.includes(search) || codeNorm.includes(search) || varNorm.includes(search);
       });
 
@@ -2951,13 +3311,13 @@
 
     function renderCustomersTable() {
       const tbody = document.getElementById('customersTableBody');
-      const search = (document.getElementById('searchCustTableInput').value || '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      const search = normalizeText(document.getElementById('searchCustTableInput').value);
 
       const filtered = state.customers.filter(c => {
         if (!search) return true;
-        const nameNorm = (c.name || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const nameNorm = normalizeText(c.name);
         const phoneClean = (c.phone || '').replace(/\D/g, '');
-        const addrNorm = (c.address || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const addrNorm = normalizeText(c.address);
         return nameNorm.includes(search) || phoneClean.includes(search) || addrNorm.includes(search);
       });
 
@@ -3042,11 +3402,13 @@
     /**
      * ĐỒNG BỘ 2 CHIỀU VỚI GOOGLE SHEET
      */
-    async function syncWithGoogleSheet() {
+    async function syncWithGoogleSheet(silent = false) {
       const apiUrl = state.settings.sheetApiUrl;
       if (!apiUrl || !apiUrl.startsWith('https://script.google.com/')) {
-        openModal('modalSettings');
-        showToast('warning', '⚠️ Hãy dán link Web App URL của Google Apps Script vào mục Cài đặt trước!');
+        if (!silent) {
+          openModal('modalSettings');
+          showToast('warning', '⚠️ Hãy dán link Web App URL của Google Apps Script vào mục Cài đặt trước!');
+        }
         return;
       }
 
@@ -3060,12 +3422,34 @@
         const res = await fetch(fetchUrl, { cache: 'no-store' });
         const data = await res.json();
 
-        if (data.ok) {
-          if (Array.isArray(data.products)) {
-            state.products = data.products.map(p => ({
-              ...p,
-              price: parseMoney(p.price)
-            }));
+        if (data.ok || Array.isArray(data.products)) {
+          if (Array.isArray(data.products) && data.products.length > 0) {
+            const flatProds = [];
+            data.products.forEach(p => {
+              const name = p.name || '';
+              const price = parseMoney(p.price);
+              const unit = p.unit || 'Hộp';
+              if (Array.isArray(p.variants) && p.variants.length > 0) {
+                p.variants.forEach(v => {
+                  flatProds.push({
+                    code: p.code ? `${p.code}-${v}` : v,
+                    name: name,
+                    variant: v,
+                    unit: unit,
+                    price: price
+                  });
+                });
+              } else {
+                flatProds.push({
+                  code: p.code || p.variant || '',
+                  name: name,
+                  variant: p.variant || '',
+                  unit: unit,
+                  price: price
+                });
+              }
+            });
+            state.products = flatProds;
             localStorage.setItem('tbk_products_v2', JSON.stringify(state.products));
           }
           if (Array.isArray(data.customers)) {
@@ -3080,15 +3464,18 @@
           if (!document.getElementById('modalHistory').classList.contains('hidden')) renderHistoryList();
           if (!document.getElementById('modalProducts').classList.contains('hidden')) renderProductsTable();
           if (!document.getElementById('modalCustomers').classList.contains('hidden')) renderCustomersTable();
-          showToast('success', `✅ Đồng bộ thành công theo Sheet! (${state.products.length} SP, ${state.customers.length} khách, ${state.orders.length} đơn).`);
+          if (!silent) {
+            showToast('success', `✅ Đồng bộ thành công theo Sheet! (${state.products.length} SP, ${state.customers.length} khách, ${state.orders.length} đơn).`);
+          }
         } else {
-          throw new Error(data.error || 'Lỗi server');
+          throw new Error(data.error || 'Dữ liệu trả về không hợp lệ');
         }
       } catch (err) {
-        console.error(err);
-        showToast('error', '❌ Lỗi kết nối Google Sheet: ' + err.message);
+        console.warn('Sync Sheet error:', err);
+        if (!silent) {
+          showToast('error', '❌ Lỗi kết nối Google Sheet: ' + err.message);
+        }
       } finally {
-        if (syncBtnText) syncBtnText.innerText = 'Đang đồng bộ...';
         if (syncBtnText) syncBtnText.innerText = 'Đồng bộ Sheet';
         if (syncBtnTextMobile) syncBtnTextMobile.innerText = 'Đồng bộ Sheet';
       }
@@ -3124,12 +3511,12 @@
      */
     function renderHistoryList(filterQuery = '') {
       const container = document.getElementById('historyListContainer');
-      const q = (filterQuery || '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      const q = normalizeText(filterQuery);
 
       const filtered = state.orders.filter(o => {
         if (!q) return true;
         const idMatch = (o.id || '').toLowerCase().includes(q);
-        const nameMatch = (o.customer?.name || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(q);
+        const nameMatch = normalizeText(o.customer?.name).includes(q);
         const phoneMatch = (o.customer?.phone || '').includes(q);
         return idMatch || nameMatch || phoneMatch;
       });
